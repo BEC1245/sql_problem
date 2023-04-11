@@ -23,14 +23,7 @@ select ename, empno from emp where deptno in(20, 30) order by ename desc;
 select ename, sal, deptno from emp where (sal between 2000 and 3000) and deptno in(20, 30) order by ename;
 
 -- 9. 1981년도에 입사한 사원의 이름과 입사일을 출력하시오. (like 연산자와 와일드카드 사용) 
-
--- like로 datetime 형식의 데이터를 검색하는 방법을 정말 모르겠습니다
-
--- 편법 1
-select ename, hiredate from emp where not (ename like 'S%' or ename like 'MI%');
-
--- 편법 2
-select ename, hiredate from emp where hiredate between '1981/01/01' and '1981/12/31';
+select ename, hiredate from emp where hiredate like '81%';
 
 -- 10. 관리자가 없는 사원의 이름과 담당 업무를 출력하시오.
 select ename, job from emp where mgr is null;
@@ -49,6 +42,8 @@ select ename, job, sal from emp where (job = 'CLERK' OR JOB = 'SALESMAN') and no
 
 -- 15. 커미션이 $500 이상인 사원의 이름과 급여 및 커미션을 출력하시오.
 select ename, sal, comm from emp where comm >= 500;
+
+commit;
 
 
 
