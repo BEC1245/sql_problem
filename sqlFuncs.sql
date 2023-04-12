@@ -45,7 +45,8 @@ select min(sal)
 from emp 
 where mgr is not null
 group by job
-having min(sal) > 2000;
+having min(sal) > 2000
+order by min(sal) desc;
 
 -- ​29. 각 부서에 대해 부서번호, 사원 수, 부서 내의 모든 사원의 평균 급여를 출력하시오. 평균 급여는 소수점 둘째 자리로 반올림 하시오.
 select deptno, count(job), round(avg(sal), 2) 
