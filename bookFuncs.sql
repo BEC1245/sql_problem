@@ -14,14 +14,4 @@ select count(distinct publisher)
 from book
 where publisher != 'Pearson';
 
--- 후기
-고정 관념이라는게 참 무서운 것 같습니다
-from에 두개의 행을 넣어 퍼플리셔가 축구인 것만 
-골라서 like 할 수 있었는데
-
-되지도 않는 group by 문에
-"자 이건 새로운 정렬 형식이란다 어서먹머^^"라며
-강제로 group by substt(bookname, 1, 2)로만
-주구 장창 풀려고 해서 꽤나 오랜 시간이 걸렸네요
-
 
