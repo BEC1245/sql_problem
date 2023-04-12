@@ -10,7 +10,7 @@ select count(bookid)
 from book;
 
 -- (2) 마당서점에 도서를 출고하는 출판사의 총개수
-select count(publisher)
+select count(distinct publisher)
 from book
 where publisher != 'Pearson';
 
