@@ -1,8 +1,9 @@
 -- 박지성의 총 구매액(박지성의 고객번호는 1번으로 놓고 작성)
 -- 박지성의 구매한 도서의 수(박지성의 고객번호는 1번으로 놓고 작성)
-select sum(price), count(custid) 
-from book, customer 
-where bookname like('축구%') and custid = 1;
+select sum(saleprice), count(custid) 
+from orders
+group by custid
+HAVING custid = 1;
 
 -- 마당서점 == 도서관
 -- (1) 마당서점 도서의 총 개수
@@ -13,5 +14,7 @@ from book;
 select count(distinct publisher)
 from book
 where publisher != 'Pearson';
+
+select * from orders;
 
 
