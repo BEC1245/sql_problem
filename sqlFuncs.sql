@@ -26,10 +26,10 @@ select decode(job, 'ANALIST', sal + 200,
 from emp;
 
 -- 23. 모든 사원의 급여 최고액, 최저액, 총액 및 평균 급여를 출력하시오. 평균에 대해서는 정수로 반올림하시오.
-select max(sal), min(sal), sum(sal), floor(avg(sal)) from emp;
+select max(sal), min(sal), sum(sal), round(avg(sal)) from emp;
 
 -- 24. 각 담당 업무 유형별로 급여 최고액, 최저액, 총액 및 평균 액을 출력하시오. 평균에 대해서는 정수로 반올림 하시오.
-select max(sal), min(sal), sum(sal), floor(avg(sal)) from emp group by job;
+select max(sal), min(sal), sum(sal), round(avg(sal)) from emp group by job;
 
 -- 25.  COUNT(*) 함수를 이용하여 담당업무가 동일한 사원 수를 출력하시오.
 select count(*) from emp group by job;
