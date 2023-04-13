@@ -14,18 +14,18 @@ FROM EMP NATURAL JOIN DEPT
 WHERE ENAME LIKE('%A%');
 
 -- 37. JOIN을 이용하여 NEW YORK에 근무하는 모든 사원의 이름, 업무, 부서번호 및 부서명을 출력하시오.
-select ENAME, JOB, EMPNO
+select ENAME, JOB, DEPTNO, DNAME
 from emp e join dept d
 using(deptno)
 where d.loc = 'NEW YORK';
 
 -- 38. SELF JOIN을 사용하여 사원의 이름 및 사원번호, 관리자 이름을 출력하시오.
-SELECT A.ENAME, A.EMPNO, A.MGR
+SELECT A.ENAME, A.EMPNO, b.ENAME
 FROM EMP A INNER JOIN EMP B
 ON A.MGR = B.EMPNO;
 
 -- 39. OUTER JOIN, SELF JOIN을 사용하여 관리자가 없는 사원을 포함하여 사원번호를 기준으로 내림차순 정렬하여 출력하시오.
-SELECT A.ENAME, A.EMPNO, A.MGR
+SELECT A.ENAME, A.EMPNO, b.ENAME
 FROM EMP A LEFT OUTER JOIN EMP B
 ON A.MGR = B.EMPNO
 ORDER BY EMPNO DESC;
