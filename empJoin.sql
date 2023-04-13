@@ -14,7 +14,7 @@ FROM EMP NATURAL JOIN DEPT
 WHERE ENAME LIKE('%A%');
 
 -- 37. JOIN을 이용하여 NEW YORK에 근무하는 모든 사원의 이름, 업무, 부서번호 및 부서명을 출력하시오.
-select *
+select ENAME, JOB, EMPNO
 from emp e join dept d
 using(deptno)
 where d.loc = 'NEW YORK';
@@ -43,7 +43,7 @@ ON B.ENAME = 'WARD'
 WHERE A.HIREDATE > B.HIREDATE;
 
 -- 42. SELF JOIN 을 사용하여 관리자보다 먼저 입사한 모든 사원의 이름 및 입사일을 관리자의 이름 및 입사일과 함께 출력하시오.
-SELECT  A.ENAME, A.HIREDATE
+SELECT  A.ENAME, A.HIREDATE, B.ENAME, B.HIREDATE
 FROM EMP A JOIN EMP B
 ON A.MGR = B.EMPNO
 WHERE A.HIREDATE < B.HIREDATE;
