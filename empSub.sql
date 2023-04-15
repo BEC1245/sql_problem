@@ -34,21 +34,21 @@ order by a.sal desc;
 
 -- ​48. 담당업무가 ANALYST 인 사원보다 급여가 적으면서 업무가 ANALYST가 아닌 사원들을 표시(사원번호, 이름, 담당 업무, 급여)하시오.
 -- 서브 쿼리로 job이 analyze인 사원의 월급의 최소를 구해 job이 analyze가 아닌 사원과 비교
-select *
+select b.empno, b.ename, b.job, b.sal
 from emp b
 where sal < (select min(a.sal) from emp a where job = 'ANALYST') and b.job != 'ANALYST';
 
 
 -- 49. 부하직원이 없는 사원의 이름을 표시하시오.
 -- null 문제를 해결하지 않으면 아무것도 안 띄어준다
-select *
+select a.ename
 from emp a 
 where empno not in (select distinct mgr from emp where mgr is not null);
 
 
 -- 50. 부하직원이 있는 사원의 이름을 표시하시오.
 -- mgr에서 하나라도 자신의 번호가 있으면 출력
-select *
+select a.ename
 from emp a 
 where empno in (select distinct mgr from emp);
 
@@ -79,7 +79,7 @@ on a.deptno = b.deptno;
 
 
 -- 55. KING에게 보고하는 사원의 이름과 급여를 표시하시오.
-select *
+select a.ename, a.sal
 from emp a
 where mgr = (select empno from emp b where b.ename = 'KING');
 
@@ -107,7 +107,7 @@ on a.newAvg = b.newMin;
 
 -- 59. 담당업무가 MANAGER 인 사원이 소속된 부서와 동일한 부서의 사원을 표시하시오.
 -- 매니저는 모든 부서에 있기에 모든 사람이 출력됨 (만약 여기서 JOB을 'ANALYST'로 바꾸면 부서 번호가 20인 데이터만 출력)
-select *
+select ename
 from emp
 where deptno in(select deptno from emp where job = 'MANAGER');
 
