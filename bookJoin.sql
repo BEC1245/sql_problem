@@ -14,29 +14,29 @@ USING (CUSTID)
 WHERE A.NAME = '박지성';
 
 -- (7) 박지성이구매하지않은도서의이름
-SELECT b.bookname
-FROM BOOK B INNER JOIN ORDERS O
-USING(BOOKID) JOIN CUSTOMER A
-USING (CUSTID)
-where A.NAME != '박지성';
+select c.bookname
+from book c
+where bookid in (select b.bookid 
+                 from customer a join orders b 
+                 on a.custid = b.custid 
+                 where a.name != '박지성');
 
 -- 2 마당서점의 운영자와 경영자가 요구하는 다음 질문에 대해 SQL 문을작성하시오.
 
 -- (8) 주문하지 않은 고객의 이름(부속질의사용)
-SELECT A.NAME
-FROM CUSTOMER A, ORDERS B
-WHERE A.CUSTID = B.CUSTID(+) 
-AND B.CUSTID IS NULL; 
+select name
+from customer 
+where NOT custid in(select custid from orders);
 
 -- (9) 주문금액의 총액과 주문의 평균금액
 SELECT SUM(SALEPRICE), AVG(SALEPRICE)
 FROM ORDERS;
 
 -- (10) 고객의 이름과 고객별 구매액
-SELECT CUSTOMER.name ,sum(orders.saleprice)
-FROM CUSTOMER join ORDERS
-on CUSTOMER.CUSTID = ORDERS.CUSTID
-group BY CUSTOMER.name;
+select a.name, sum(saleprice)
+from customer a join orders b
+on a.custid = b.custid
+group by a.name;
 
 -- (11) 고객의 이름과 고객이 구매한 도서목록
 SELECT A.NAME, B.BOOKNAME
@@ -57,17 +57,19 @@ from customer d
 where d.custid in (select a.custid from orders a group by a.custid having avg(a.saleprice) > (select avg(c.saleprice) from orders c));
 
 -- (1) 박지성이 구매한 도서의 출판사와 같은 출판사에서 도서를 구매한 고객의 이름
-select CU.NAME
-from customer cu join orders ord 
-on cu.custid = ord.custid join book bk 
-on ord.bookid = bk.bookid
-where bk.publisher
-in  (select publisher from customer a, orders b, book c where a.name = '박지성' and a.custid = b.custid and b.bookid = c.bookid) 
-    and cu.name != '박지성';
+select a.name
+from customer a join orders b
+on a.custid = b.custid join book c
+on b.bookid = c.bookid
+where c.publisher in(select distinct c.publisher      
+                     from customer a join orders b
+                     on a.custid = b.custid join book c
+                     on b.bookid = c.bookid
+                     where a.name = '박지성') and a.name != '박지성';
 
 -- 두 개 이상의 서로 다른 출판사에서 도서를 구매한 고객의 이름
 select cu.name 
 from customer cu
-where cu.custid in(select custid from book natural join orders group by custid having count(distinct publisher) >= 2);
+where cu.custid in(select custid from orders natural join book group by custid having count(distinct publisher) >= 2);
 
 
