@@ -24,12 +24,12 @@ where fr_address = '서울';
 -- UPDATE ----------------------------
 
 -- 생성 날자의 등록이 실패한 친구의 생성날자 수정
-update test --phoneinfo_basic
+update phoneinfo_basic
 set fr_regdate = sysdate
 where fr_regdate is null;
 
 -- 전화번호를 잘못 등록한 친구의 전화번호 수정
-update test --phoneinfo_basic
+update phoneinfo_basic
 set fr_phonenumber = '010-3323-1987'
 where fr_name = '돈키호테';
 
