@@ -17,7 +17,7 @@ create table phoneInfo_univ (
 
 create table phoneInfo_com (
     idx number(6) constraint PK_idx_pInfoCom primary key,
-    fr_c_company varchar(20) constraint notNull_frCcompany_pInfoCom not null,
+    fr_c_company varchar(20) default 'N' constraint notNull_frCcompany_pInfoCom not null,
     fr_ref number(6) not null,
     constraint REF_frRef_pInfoCom foreign key(fr_ref) references phoneInfo_basic(idx)
 );
