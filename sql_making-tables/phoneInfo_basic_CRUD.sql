@@ -36,11 +36,11 @@ where fr_name = '돈키호테';
 -- delete
 
 -- 친구 관계를 정리한 히스클리프의 데이터 삭제
-delete from test
+delete from phoneinfo_basic
 where fr_name = '히스클리프';
 
 -- 잘못 중복 등록한 데이터를 모두 삭제
-delete from test
+delete from phoneinfo_basic
 where idx in(select idx from test where fr_name = (select fr_name from test group by fr_name having count(fr_name) >= 2));
 
 
