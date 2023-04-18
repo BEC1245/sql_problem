@@ -42,14 +42,3 @@ delete from phoneInfo_com;
 
 -- 아니면
 truncate table phoneInfo_com;
-
-drop table test;
-
-
-
-
-
-
-
-
-
